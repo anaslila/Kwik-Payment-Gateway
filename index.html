@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kwik Payment Gateway</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Kwik PG v1.023</title>
 
     <!-- Icons & Manifest Configurations -->
-    <link rel="icon" type="image/png" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLeRTcvZ8b7OUiJTlp1oJX0DDMcT3qTHI7kZnr5Sdpww&s=10" title="Kwik PG v1.023">
-    <link rel="apple-touch-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLeRTcvZ8b7OUiJTlp1oJX0DDMcT3qTHI7kZnr5Sdpww&s=10">
+    <link rel="icon" type="image/png" href="https://cdn3d.iconscout.com/3d/premium/thumb/payment-gateway-3d-icon-png-download-11537505.png?f=webp" title="Kwik PG v1.023">
+    <link rel="apple-touch-icon" href="https://cdn3d.iconscout.com/3d/premium/thumb/payment-gateway-3d-icon-png-download-11537505.png?f=webp">
     
     <!-- Mobile Progressive Web App Meta (Add to Home Screen) -->
     <meta name="apple-mobile-web-app-title" content="Kwik Payment Gateway">
@@ -30,6 +30,11 @@
         .sharp-edge {
             border-radius: 0px !important;
         }
+        
+        /* Direct iOS override to guarantee 16px font sizing on focus to stop scaling zoom loops */
+        input[type="text"], input[type="number"] {
+            font-size: 16px !important;
+        }
     </style>
 </head>
 <body class="flex items-center justify-center min-h-screen p-4 sm:p-8 antialiased">
@@ -39,7 +44,7 @@
         <!-- Premium Core App Header -->
         <div class="flex items-center justify-between pb-6 border-b border-gray-200">
             <div class="flex items-center space-x-4">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLeRTcvZ8b7OUiJTlp1oJX0DDMcT3qTHI7kZnr5Sdpww&s=10" 
+                <img src="https://cdn3d.iconscout.com/3d/premium/thumb/payment-gateway-3d-icon-png-download-11537505.png?f=webp" 
                      alt="Kwik Payment Gateway Logo" 
                      class="w-12 h-12 object-cover border border-gray-200 sharp-edge">
                 <div>
@@ -63,13 +68,14 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-3">
                     <div>
                         <label class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-1">UPI ID (VPA) *</label>
+                        <!-- Setting text-base (16px) inside the text boxes disables iOS zoom -->
                         <input type="text" id="upiIdInput" placeholder="merchant@bank" 
-                               class="block w-full px-3 py-2 bg-white border border-gray-300 sharp-edge focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 text-sm transition-all text-slate-900 placeholder-gray-400">
+                               class="block w-full px-3 py-2 bg-white border border-gray-300 sharp-edge focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 text-base transition-all text-slate-900 placeholder-gray-400">
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-1">Business Name *</label>
                         <input type="text" id="businessNameInput" placeholder="Legal Settlement Title" 
-                               class="block w-full px-3 py-2 bg-white border border-gray-300 sharp-edge focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 text-sm transition-all text-slate-900 placeholder-gray-400">
+                               class="block w-full px-3 py-2 bg-white border border-gray-300 sharp-edge focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 text-base transition-all text-slate-900 placeholder-gray-400">
                     </div>
                 </div>
             </div>
@@ -85,15 +91,15 @@
                     <div>
                         <label class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-1">Requested Amount (INR) *</label>
                         <div class="relative">
-                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-500 text-sm font-semibold">₹</span>
+                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-500 text-base font-semibold">₹</span>
                             <input type="number" id="amountInput" placeholder="0.00" min="0.01" step="any"
-                                   class="block w-full pl-7 pr-3 py-2 bg-white border border-gray-300 sharp-edge focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 font-bold text-sm text-slate-900 placeholder-gray-400">
+                                   class="block w-full pl-7 pr-3 py-2 bg-white border border-gray-300 sharp-edge focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 font-bold text-base text-slate-900 placeholder-gray-400">
                         </div>
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-1">Payment Remark / Note <span class="text-slate-400 lowercase"></span></label>
                         <input type="text" id="noteInput" placeholder="Invoice or transaction description" 
-                               class="block w-full px-3 py-2 bg-white border border-gray-300 sharp-edge focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 text-sm transition-all text-slate-900 placeholder-gray-400">
+                               class="block w-full px-3 py-2 bg-white border border-gray-300 sharp-edge focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 text-base transition-all text-slate-900 placeholder-gray-400">
                     </div>
                 </div>
             </div>
