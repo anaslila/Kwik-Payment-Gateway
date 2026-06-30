@@ -6,7 +6,7 @@
     <title>Kwik Payment Gateway</title>
 
     <!-- Icons & Manifest Configurations -->
-    <link rel="icon" type="image/png" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLeRTcvZ8b7OUiJTlp1oJX0DDMcT3qTHI7kZnr5Sdpww&s=10" title="Kwik PG">
+    <link rel="icon" type="image/png" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLeRTcvZ8b7OUiJTlp1oJX0DDMcT3qTHI7kZnr5Sdpww&s=10" title="Kwik PG v1.023">
     <link rel="apple-touch-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLeRTcvZ8b7OUiJTlp1oJX0DDMcT3qTHI7kZnr5Sdpww&s=10">
     
     <!-- Mobile Progressive Web App Meta (Add to Home Screen) -->
@@ -21,11 +21,12 @@
 
     <style>
         body {
-            font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+            /* Full cross-platform Segoe UI responsive font rendering stack */
+            font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "SF Pro Text", SFUIDisplay, Roboto, Helvetica, Arial, sans-serif;
             background-color: #f8fafc;
             color: #0f172a;
         }
-        /* Enforcing strict sharp edges across the interface elements */
+        /* Strict sharp edges across all UI elements */
         .sharp-edge {
             border-radius: 0px !important;
         }
@@ -46,10 +47,10 @@
                     <p class="text-xs text-slate-500 tracking-wider">Enterprise Invoicing Operations Platform</p>
                 </div>
             </div>
-            <span class="text-[10px] font-mono font-bold bg-slate-100 border border-slate-200 text-slate-700 px-2 py-0.5 sharp-edge">v1.021</span>
+            <span class="text-[10px] font-mono font-bold bg-slate-100 border border-slate-200 text-slate-700 px-2 py-0.5 sharp-edge">v1.023</span>
         </div>
 
-        <!-- Dynamic Unified Processing Input Fields -->
+        <!-- Dynamic Processing Input Fields -->
         <div class="mt-6 space-y-6">
             
             <!-- Section 1: Beneficiary Information -->
@@ -77,7 +78,7 @@
             <div>
                 <div class="flex items-center space-x-2 pb-2 border-b border-gray-100 text-xs font-bold text-slate-800 uppercase tracking-wider">
                     <svg class="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
-                    <span>2. Financial Ledger & Core Parameters</span>
+                    <span>2. Financial Ledger Parameters</span>
                 </div>
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-3">
@@ -90,28 +91,9 @@
                         </div>
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-1">Payment Remark / Note <span class="text-slate-400 lowercase">(GPay Fixed)</span></label>
+                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-1">Payment Remark / Note <span class="text-slate-400 lowercase"></span></label>
                         <input type="text" id="noteInput" placeholder="Invoice or transaction description" 
                                class="block w-full px-3 py-2 bg-white border border-gray-300 sharp-edge focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 text-sm transition-all text-slate-900 placeholder-gray-400">
-                    </div>
-                </div>
-
-                <!-- Expanded Fields Block (UPI Standard Parameters) -->
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
-                    <div>
-                        <label class="block text-[11px] font-bold text-slate-600 uppercase tracking-wide mb-1">Transaction Ref ID</label>
-                        <input type="text" id="refIdInput" placeholder="e.g., TXN99821" 
-                               class="block w-full px-3 py-1.5 bg-white border border-gray-300 sharp-edge focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 text-xs text-slate-900 placeholder-gray-400">
-                    </div>
-                    <div>
-                        <label class="block text-[11px] font-bold text-slate-600 uppercase tracking-wide mb-1">Merchant Code (MCC)</label>
-                        <input type="number" id="mccInput" placeholder="e.g., 0000" max="9999"
-                               class="block w-full px-3 py-1.5 bg-white border border-gray-300 sharp-edge focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 text-xs text-slate-900 placeholder-gray-400">
-                    </div>
-                    <div>
-                        <label class="block text-[11px] font-bold text-slate-600 uppercase tracking-wide mb-1">Minimum Amount (₹)</label>
-                        <input type="number" id="minAmountInput" placeholder="Optional floor limit" min="0" step="any"
-                               class="block w-full px-3 py-1.5 bg-white border border-gray-300 sharp-edge focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 text-xs text-slate-900 placeholder-gray-400">
                     </div>
                 </div>
             </div>
@@ -176,11 +158,6 @@
             const amount = document.getElementById("amountInput").value.trim();
             const note = document.getElementById("noteInput").value.trim();
 
-            // Collecting Advanced Extended Context Streams
-            const refId = document.getElementById("refIdInput").value.trim();
-            const mcc = document.getElementById("mccInput").value.trim();
-            const minAmount = document.getElementById("minAmountInput").value.trim();
-
             // DOM UI References
             const qrWrapper = document.getElementById("qrWrapper");
             const displayBizName = document.getElementById("displayBizName");
@@ -209,13 +186,7 @@
             const safeNote = note ? encodeURIComponent(note) : "Kwik Gateway Checkout";
 
             // Initialize structural URI payload framework
-            // Base Standard: upi://pay?pa={VPA}&pn={NAME}&am={AMOUNT}&tn={NOTE}&cu=INR
             activePayloadStr = `upi://pay?pa=${upiId}&pn=${safeBizName}&am=${amount}&tn=${safeNote}&cu=INR`;
-
-            // Appending Advanced Detailed UPI Specifications conditionally if user defined
-            if (refId) activePayloadStr += `&tr=${encodeURIComponent(refId)}`;
-            if (mcc) activePayloadStr += `&mc=${encodeURIComponent(mcc)}`;
-            if (minAmount && parseFloat(minAmount) > 0) activePayloadStr += `&mam=${minAmount}`;
 
             // Resetting UI targets
             qrcodeBox.innerHTML = "";
